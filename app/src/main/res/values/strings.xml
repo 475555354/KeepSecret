@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">KeepSecret</string>
+    <string name="settings">Settings</string>
+    <string name="open_navigation_drawer">open</string>
+    <string name="close_navigation_drawer">close</string>
+    <string name="delete">delete</string>
+</resources>
