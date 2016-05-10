@@ -1,12 +1,15 @@
 package com.example.kid.keepsecret;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
 import com.example.kid.keepsecret.DB.NoteDB;
@@ -17,8 +20,7 @@ import com.example.kid.keepsecret.model.Note;
  */
 public class NoteActivity extends AppCompatActivity {
 
-    public static final String uuidTag = "UUID_TAG";
-
+    public static final String UUID_TAG = "UUID_TAG";
 
     private EditText mEditText;
 
@@ -33,17 +35,26 @@ public class NoteActivity extends AppCompatActivity {
         getSupportActionBar().setHomeButtonEnabled(true);
 
         mNoteDB = NoteDB.getInstance(this);
+        mEditText = (EditText)findViewById(R.id.edit_text);
 
         Intent i = getIntent();
-        String uuid = i.getStringExtra(uuidTag);
+        String uuid = i.getStringExtra(UUID_TAG);
         if (uuid != null){
             mNote = mNoteDB.loadNoteById(uuid);
+            mEditText.setText(mNote.getContent());
         }else {
             mNote = new Note();
+
+            mEditText.setFocusable(true);
+            mEditText.setFocusableInTouchMode(true);
+            mEditText.requestFocus();
+            Log.d("123456", "noteactivity");
+            InputMethodManager imm = (InputMethodManager)
+                    getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.showSoftInput(mEditText, InputMethodManager.SHOW_FORCED);
+
         }
 
-        mEditText = (EditText)findViewById(R.id.edit_text);
-        mEditText.setText(mNote.getContent());
         mEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {

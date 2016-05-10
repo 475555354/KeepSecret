@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:orientation="vertical"
+              android:background="#ffffff"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <LinearLayout
+        android:id="@+id/drawer_item_add"
+        style="@style/ItemLayoutStyle">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginRight="15dp"
+            android:src="@android:drawable/ic_menu_add"/>
+
+        <TextView
+            style="@style/ItemTextViewStyle"
+            android:text="@string/add_item"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/drawer_item_set"
+        style="@style/ItemLayoutStyle">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginRight="15dp"
+            android:src="@android:drawable/ic_menu_set_as"/>
+
+        <TextView
+            style="@style/ItemTextViewStyle"
+            android:text="@string/set_pass"/>
+
+    </LinearLayout>
+
+</LinearLayout>

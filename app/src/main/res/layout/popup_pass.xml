@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:id="@+id/pop_pass"
+              android:background="#ffffff"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    
+    <com.jungly.gridpasswordview.GridPasswordView
+        android:id="@+id/pop_pass_grid"
+        android:layout_width="300dp"
+        android:layout_height="48dp"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="8dp"
+        app:gpvPasswordLength="4"
+        app:gpvPasswordType="numberPassword"/>
+
+    <TextView
+        android:id="@+id/pop_pass_text"
+        style="@style/ItemTextViewStyle"
+        android:layout_above="@id/pop_pass_grid"
+        android:layout_centerHorizontal="true"
+        />
+
+    <Button
+        android:id="@+id/pop_exit_btn"
+        android:layout_below="@id/pop_pass_grid"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="18dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/exit_pass"/>
+
+</RelativeLayout>

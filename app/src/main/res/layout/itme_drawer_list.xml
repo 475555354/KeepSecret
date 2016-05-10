@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              style="@style/ItemLayoutStyle">
+
+    <ImageView
+        android:id="@+id/drawer_item_image"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginRight="15dp"/>
+
+    <TextView
+        android:id="@+id/drawer_item_text"
+        style="@style/ItemTextViewStyle"/>
+
+</LinearLayout>

@@ -4,4 +4,15 @@
     <string name="open_navigation_drawer">open</string>
     <string name="close_navigation_drawer">close</string>
     <string name="delete">delete</string>
+    <string name="input_hint">请输入内容...</string>
+    <string name="add_item">新建秘密</string>
+    <string name="set_pass">设置密码</string>
+    <string name="enter_pass">请输入密码</string>
+    <string name="enter_new_pass">请输入新密码</string>
+    <string name="re_enter_pass">请再次输入新密码</string>
+    <string name="set_pass_successfully">设置密码成功</string>
+    <string name="set_pass_failed">两次密码输入不一致，请重新设置</string>
+    <string name="error_hint">密码输入错误，应用将退出</string>
+    <string name="exit_pass">退出</string>
+    <string name="double_click_exit_text">再次点击退出</string>
 </resources>
