@@ -1,5 +1,7 @@
 package com.example.kid.keepsecret;
 
+import android.app.SearchManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -9,9 +11,8 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.ActionMode;
 import android.view.Gravity;
@@ -39,7 +40,7 @@ import com.jungly.gridpasswordview.PasswordType;
 
 import java.util.ArrayList;
 
-public class NoteListActivity extends AppCompatActivity implements View.OnClickListener{
+public class NoteListActivity extends BaseActivity implements View.OnClickListener{
 
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
@@ -65,7 +66,7 @@ public class NoteListActivity extends AppCompatActivity implements View.OnClickL
     private DoubleClickExitHelper mDoubleClickExitHelper;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_note_list);
         initDB();
@@ -83,23 +84,18 @@ public class NoteListActivity extends AppCompatActivity implements View.OnClickL
     private void initView(){
         mDoubleClickExitHelper = new DoubleClickExitHelper(this);
 
-        //init actionbar
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setHomeButtonEnabled(true);
-
         //init main layout view
         mActionButton = (FloatingActionButton) findViewById(R.id.fab);
         noteList = (ListView)findViewById(R.id.note_list);
 
         mActionButton.setOnClickListener(this);
+
         mItemAdapter = new ItemAdapter(this, R.layout.item_note, mNotes);
         noteList.setAdapter(mItemAdapter);
         noteList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String uuid = mNotes.get(position).getId();
-                Log.d("123456", uuid);
                 Intent i = new Intent(NoteListActivity.this, NoteActivity.class);
                 i.putExtra(NoteActivity.UUID_TAG, uuid);
                 startActivity(i);
@@ -361,6 +357,13 @@ public class NoteListActivity extends AppCompatActivity implements View.OnClickL
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_note_list, menu);
+
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        SearchView searchView = (SearchView) menu.findItem(R.id.search)
+                .getActionView();
+        searchView.setSearchableInfo(searchManager
+                .getSearchableInfo(new ComponentName(this, SearchResultsActivity.class)));
+
         return true;
     }
 
@@ -374,7 +377,7 @@ public class NoteListActivity extends AppCompatActivity implements View.OnClickL
             return true;
 
         //noinspection SimplifiableIfStatement
-        if (item.getItemId() == R.id.action_settings) {
+        if (item.getItemId() == R.id.search) {
             return true;
         }
 

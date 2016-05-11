@@ -3,7 +3,6 @@ package com.example.kid.keepsecret;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -18,7 +17,7 @@ import com.example.kid.keepsecret.model.Note;
 /**
  * Created by niuwa on 2016/4/29.
  */
-public class NoteActivity extends AppCompatActivity {
+public class NoteActivity extends BaseActivity {
 
     public static final String UUID_TAG = "UUID_TAG";
 
@@ -30,9 +29,8 @@ public class NoteActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
+        addActivit(this);
         setContentView(R.layout.activity_note);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
 
         mNoteDB = NoteDB.getInstance(this);
         mEditText = (EditText)findViewById(R.id.edit_text);
@@ -113,5 +111,11 @@ public class NoteActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(menuItem);
         }
+    }
+
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+        finishAll();
     }
 }

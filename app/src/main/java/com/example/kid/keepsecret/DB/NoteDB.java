@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.example.kid.keepsecret.model.Note;
 
@@ -57,6 +58,20 @@ public class NoteDB {
         return list;
     }
 
+    public ArrayList<Note> loadNote(String content){
+        ArrayList<Note> list = new ArrayList<Note>();
+        String sb = new StringBuilder().append("%").append(content).append("%").toString();
+        Log.d("123456", sb);
+        cursor = db.query(TABLE_NAME, null, "content like ?", new String[]{sb}, null, null, null);
+        if (cursor.moveToFirst()){
+            do {
+                setNote();
+                list.add(note);
+            }while (cursor.moveToNext());
+        }
+        return list;
+    }
+
     public Note loadNoteById(String uuid){
         cursor = db.query(TABLE_NAME, null, "uuid = ?",
                 new String[]{uuid}, null, null, null);
@@ -67,6 +82,7 @@ public class NoteDB {
             return null;
         }
     }
+
 
     public void updateNote(String uuid, String content){
         ContentValues values = new ContentValues();
