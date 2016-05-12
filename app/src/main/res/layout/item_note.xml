@@ -4,6 +4,7 @@
     <TextView
         style="@style/ItemTextViewStyle"
         android:id="@+id/item_title"
+        android:maxWidth="240dp"
         android:layout_alignParentLeft="true"/>
 
     <ImageView

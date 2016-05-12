@@ -10,6 +10,8 @@
         android:layout_height="match_parent"
         android:gravity="top"
         android:hint="@string/input_hint"
+        android:lineSpacingMultiplier="1.5"
+        android:padding="15dp"
         android:background="@null"/>
 
 </LinearLayout>

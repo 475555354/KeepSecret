@@ -34,6 +34,7 @@
         <item name="android:textColor">@color/item_text</item>
         <item name="android:textSize">@dimen/text_size_16</item>
         <item name="android:drawablePadding">@dimen/space_10</item>
+        <item name="android:singleLine">true</item>
     </style>
 
 
