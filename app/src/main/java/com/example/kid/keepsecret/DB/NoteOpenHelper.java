@@ -17,7 +17,7 @@ public class NoteOpenHelper extends SQLiteOpenHelper {
             + "uuid text,"
             + "content text,"
             + "date text,"
-            + "tag_color integer)";
+            + "tag_color text)";
 
     public NoteOpenHelper(Context context, String name, CursorFactory factory, int version){
         super(context, name, factory, version);

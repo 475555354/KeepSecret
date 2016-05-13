@@ -1,6 +1,7 @@
 package com.example.kid.keepsecret;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,7 +43,10 @@ public class ItemAdapter extends ArrayAdapter<Note>{
 
         title.setText(note.getContent());
         time.setText(note.getDate());
-        tag.setImageResource(note.getTagColor());
+        //tag.setDrawingCacheBackgroundColor(Color.parseColor(note.getTagColor()));
+        if (note.getTagColor() != null){
+            tag.setColorFilter(Color.parseColor(note.getTagColor()));
+        }
 
         return v;
     }

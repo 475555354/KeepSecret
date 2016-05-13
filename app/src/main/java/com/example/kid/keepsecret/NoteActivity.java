@@ -10,6 +10,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 import com.example.kid.keepsecret.DB.NoteDB;
 import com.example.kid.keepsecret.model.Note;
@@ -21,7 +23,13 @@ public class NoteActivity extends BaseActivity {
 
     public static final String UUID_TAG = "UUID_TAG";
 
+    public static final String YELLOW = "#ffe7ad48";
+    public static final String BLUE = "#ff4a95ce";
+    public static final String GREEN = "#ff3db58b";
+    public static final String RED = "#ffe0664b";
+
     private EditText mEditText;
+    private RadioGroup mRadioGroup;
 
     private NoteDB mNoteDB;
     private Note mNote;
@@ -34,12 +42,14 @@ public class NoteActivity extends BaseActivity {
 
         mNoteDB = NoteDB.getInstance(this);
         mEditText = (EditText)findViewById(R.id.edit_text);
+        mRadioGroup = (RadioGroup) findViewById(R.id.radio_group);
 
         Intent i = getIntent();
         String uuid = i.getStringExtra(UUID_TAG);
         if (uuid != null){
             mNote = mNoteDB.loadNoteById(uuid);
             mEditText.setText(mNote.getContent());
+            setTagChecked();
         }else {
             mNote = new Note();
 
@@ -69,6 +79,32 @@ public class NoteActivity extends BaseActivity {
 
             }
         });
+
+        mRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                RadioButton radioButton = (RadioButton)findViewById(checkedId);
+                String tagColor = radioButton.getText().toString();
+                mNote.setTagColor(tagColor);
+            }
+        });
+    }
+
+    private void setTagChecked(){
+        switch (mNote.getTagColor()){
+            case YELLOW:
+                mRadioGroup.check(R.id.radio_yellow_tag);
+                break;
+            case BLUE:
+                mRadioGroup.check(R.id.radio_blue_tag);
+                break;
+            case GREEN:
+                mRadioGroup.check(R.id.radio_green_tag);
+                break;
+            case RED:
+                mRadioGroup.check(R.id.radio_red_tag);
+                break;
+        }
     }
 
     @Override
@@ -82,7 +118,7 @@ public class NoteActivity extends BaseActivity {
         super.onPause();
         if (mNote.getContent() != null){
             if (mNoteDB.loadNoteById(mNote.getId()) != null){
-                mNoteDB.updateNote(mNote.getId(), mNote.getContent());
+                mNoteDB.updateNote(mNote.getId(), mNote.getContent(), mNote.getTagColor());
             }else {
                 mNoteDB.saveNote(mNote);
             }

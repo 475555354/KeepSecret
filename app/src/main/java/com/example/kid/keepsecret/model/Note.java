@@ -13,7 +13,7 @@ public class Note {
     private String title;
     private String content;
     private Date mDate;
-    private int tagColor;
+    private String tagColor;
 
     public Note(){
         mId = UUID.randomUUID().toString();
@@ -52,11 +52,11 @@ public class Note {
         mDate = date;
     }
 
-    public int getTagColor() {
+    public String getTagColor() {
         return tagColor;
     }
 
-    public void setTagColor(int tagColor) {
+    public void setTagColor(String tagColor) {
         this.tagColor = tagColor;
     }
 }

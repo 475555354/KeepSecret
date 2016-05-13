@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
@@ -14,4 +14,56 @@
         android:padding="15dp"
         android:background="@null"/>
 
-</LinearLayout>
+    <RadioGroup
+        android:id="@+id/radio_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="15dp"
+        android:layout_alignParentBottom="true">
+
+        <RadioButton
+            android:id="@+id/radio_yellow_tag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@color/tagYellow"
+            android:textSize="0sp"
+            android:background="@color/tagYellow"/>
+
+        <RadioButton
+            android:id="@+id/radio_blue_tag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@color/tagBlue"
+            android:textSize="0sp"
+            android:background="@color/tagBlue"/>
+
+        <RadioButton
+            android:id="@+id/radio_green_tag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@color/tagGreen"
+            android:textSize="0sp"
+            android:background="@color/tagGreen"/>
+
+        <RadioButton
+            android:id="@+id/radio_red_tag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@color/tagRed"
+            android:textSize="0sp"
+            android:background="@color/tagRed"/>
+
+    </RadioGroup>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/defaultText"
+        android:layout_above="@id/radio_group"/>
+
+</RelativeLayout>
