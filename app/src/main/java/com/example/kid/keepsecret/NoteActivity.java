@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.inputmethod.InputMethodManager;
@@ -90,19 +89,21 @@ public class NoteActivity extends BaseActivity {
     }
 
     private void setTagChecked(){
-        switch (mNote.getTagColor()){
-            case YELLOW:
-                mRadioGroup.check(R.id.radio_yellow_tag);
-                break;
-            case BLUE:
-                mRadioGroup.check(R.id.radio_blue_tag);
-                break;
-            case GREEN:
-                mRadioGroup.check(R.id.radio_green_tag);
-                break;
-            case RED:
-                mRadioGroup.check(R.id.radio_red_tag);
-                break;
+        if (mNote.getTagColor() != null){
+            switch (mNote.getTagColor()){
+                case YELLOW:
+                    mRadioGroup.check(R.id.radio_yellow_tag);
+                    break;
+                case BLUE:
+                    mRadioGroup.check(R.id.radio_blue_tag);
+                    break;
+                case GREEN:
+                    mRadioGroup.check(R.id.radio_green_tag);
+                    break;
+                case RED:
+                    mRadioGroup.check(R.id.radio_red_tag);
+                    break;
+            }
         }
     }
 

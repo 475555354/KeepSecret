@@ -41,7 +41,7 @@ import java.util.ArrayList;
 
 public class NoteListActivity extends BaseActivity implements View.OnClickListener{
 
-    private static final String SET_TEXT_HINT = "请立即设置密码，保护您的隐私哦~";
+    private static final String SET_TEXT_HINT = "问了保护您的隐私，请立即侧滑设置密码~";
 
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
