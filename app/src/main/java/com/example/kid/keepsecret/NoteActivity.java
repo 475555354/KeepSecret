@@ -56,7 +56,6 @@ public class NoteActivity extends BaseActivity {
             mEditText.setFocusable(true);
             mEditText.setFocusableInTouchMode(true);
             mEditText.requestFocus();
-            Log.d("123456", "noteactivity");
             InputMethodManager imm = (InputMethodManager)
                     getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.showSoftInput(mEditText, InputMethodManager.SHOW_FORCED);

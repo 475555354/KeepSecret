@@ -13,7 +13,6 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.SearchView;
-import android.util.Log;
 import android.view.ActionMode;
 import android.view.Gravity;
 import android.view.KeyEvent;
@@ -41,6 +40,8 @@ import com.jungly.gridpasswordview.PasswordType;
 import java.util.ArrayList;
 
 public class NoteListActivity extends BaseActivity implements View.OnClickListener{
+
+    private static final String SET_TEXT_HINT = "请立即设置密码，保护您的隐私哦~";
 
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
@@ -71,7 +72,9 @@ public class NoteListActivity extends BaseActivity implements View.OnClickListen
         setContentView(R.layout.activity_note_list);
         initDB();
         initView();
-        if (loadPsw() != null){
+        if (loadPsw() == null){
+            Toast.makeText(this, SET_TEXT_HINT, Toast.LENGTH_SHORT).show();
+        }else {
             drawerLayout.post(new Runnable() {
                 @Override
                 public void run() {
@@ -210,7 +213,6 @@ public class NoteListActivity extends BaseActivity implements View.OnClickListen
                 popPassGrid.setFocusable(true);
                 //popPassGrid.setFocusableInTouchMode(true);
                 popPassGrid.requestFocus();
-                Log.d("123456", "notelisetactivity");
                 InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.showSoftInput(popPassGrid, InputMethodManager.SHOW_IMPLICIT);
             }
