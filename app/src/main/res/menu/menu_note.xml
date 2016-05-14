@@ -9,8 +9,8 @@
         app:showAsAction="always"/>
 
     <item
-        android:id="@+id/note_other"
-        android:title="@string/settings"
+        android:id="@+id/delete_tag"
+        android:title="@string/delete_tag"
         app:showAsAction="never"/>
 
 </menu>

@@ -46,6 +46,8 @@ public class ItemAdapter extends ArrayAdapter<Note>{
         //tag.setDrawingCacheBackgroundColor(Color.parseColor(note.getTagColor()));
         if (note.getTagColor() != null){
             tag.setColorFilter(Color.parseColor(note.getTagColor()));
+        }else {
+            tag.setColorFilter(null);
         }
 
         return v;

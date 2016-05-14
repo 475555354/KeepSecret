@@ -3,6 +3,7 @@ package com.example.kid.keepsecret;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.IdRes;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Menu;
@@ -15,10 +16,12 @@ import android.widget.RadioGroup;
 import com.example.kid.keepsecret.DB.NoteDB;
 import com.example.kid.keepsecret.model.Note;
 
+
+
 /**
  * Created by niuwa on 2016/4/29.
  */
-public class NoteActivity extends BaseActivity {
+public class NoteActivity extends BaseActivity implements RadioGroup.OnCheckedChangeListener{
 
     public static final String UUID_TAG = "UUID_TAG";
 
@@ -32,6 +35,8 @@ public class NoteActivity extends BaseActivity {
 
     private NoteDB mNoteDB;
     private Note mNote;
+
+    RadioGroup.OnCheckedChangeListener onCheckedChangeListener;
 
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -78,14 +83,7 @@ public class NoteActivity extends BaseActivity {
             }
         });
 
-        mRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                RadioButton radioButton = (RadioButton)findViewById(checkedId);
-                String tagColor = radioButton.getText().toString();
-                mNote.setTagColor(tagColor);
-            }
-        });
+        mRadioGroup.setOnCheckedChangeListener(this);
     }
 
     private void setTagChecked(){
@@ -103,8 +101,11 @@ public class NoteActivity extends BaseActivity {
                 case RED:
                     mRadioGroup.check(R.id.radio_red_tag);
                     break;
+                default:
+                    break;
             }
         }
+
     }
 
     @Override
@@ -126,6 +127,15 @@ public class NoteActivity extends BaseActivity {
     }
 
     @Override
+    public void onCheckedChanged(RadioGroup group, @IdRes int checkedId){
+        if (checkedId != -1){
+            RadioButton radioButton = (RadioButton)findViewById(checkedId);
+            String tagColor = radioButton.getText().toString();
+            mNote.setTagColor(tagColor);
+        }
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.menu_note, menu);
         return true;
@@ -133,16 +143,23 @@ public class NoteActivity extends BaseActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem menuItem){
+        String uuid = mNote.getId();
         switch (menuItem.getItemId()){
             case R.id.note_delete:
-                String uuid = mNote.getId();
                 if (uuid != null){
                     mNoteDB.deleteNoteById(uuid);
                     mNote.setContent(null);
                     finish();
                 }
                 return true;
-            case R.id.note_other:
+            case R.id.delete_tag:
+                if (uuid != null){
+                    mRadioGroup.check(-1);
+                    mNote.setTagColor(null);
+
+//                    mNote.setTagColor(null);
+//                    mNoteDB.updateNote(uuid, mNote.getContent(), mNote.getTagColor());
+                }
                 return true;
             default:
                 return super.onOptionsItemSelected(menuItem);

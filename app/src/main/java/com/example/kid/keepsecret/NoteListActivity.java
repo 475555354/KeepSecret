@@ -72,9 +72,9 @@ public class NoteListActivity extends BaseActivity implements View.OnClickListen
         setContentView(R.layout.activity_note_list);
         initDB();
         initView();
-        if (loadPsw() == null){
+        if (loadPsw() == null && savedInstanceState != null){
             Toast.makeText(this, SET_TEXT_HINT, Toast.LENGTH_SHORT).show();
-        }else {
+        }else if (loadPsw() != null){
             drawerLayout.post(new Runnable() {
                 @Override
                 public void run() {

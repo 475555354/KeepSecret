@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">KeepSecret</string>
     <string name="settings">设置</string>
+    <string name="delete_tag">删除标签</string>
     <string name="search">搜索</string>
     <string name="open_navigation_drawer">open</string>
     <string name="close_navigation_drawer">close</string>
