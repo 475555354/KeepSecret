@@ -53,12 +53,10 @@ public class NoteActivity extends BaseActivity implements RadioGroup.OnCheckedCh
         String uuid = i.getStringExtra(UUID_TAG);
         if (uuid != null){
             mNote = mNoteDB.loadNoteById(uuid);
-            Log.d("123456", String.valueOf(mNote.getDate()));
             mEditText.setText(mNote.getContent());
             setTagChecked();
         }else {
             mNote = new Note();
-            Log.d("123456", String.valueOf(mNote.getDate()));
 
             mEditText.setFocusable(true);
             mEditText.setFocusableInTouchMode(true);
@@ -120,10 +118,8 @@ public class NoteActivity extends BaseActivity implements RadioGroup.OnCheckedCh
         if (mNote.getContent() != null){
             if (mNoteDB.loadNoteById(mNote.getId()) != null){
                 mNoteDB.updateNote(mNote);
-                Log.d("123456", String.valueOf(mNote.getDate()));
             }else {
                 mNoteDB.saveNote(mNote);
-                Log.d("123456", String.valueOf(mNote.getDate()));
             }
         }
     }
