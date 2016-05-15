@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.inputmethod.InputMethodManager;
@@ -16,6 +18,7 @@ import android.widget.RadioGroup;
 import com.example.kid.keepsecret.DB.NoteDB;
 import com.example.kid.keepsecret.model.Note;
 
+import java.util.Date;
 
 
 /**
@@ -36,8 +39,6 @@ public class NoteActivity extends BaseActivity implements RadioGroup.OnCheckedCh
     private NoteDB mNoteDB;
     private Note mNote;
 
-    RadioGroup.OnCheckedChangeListener onCheckedChangeListener;
-
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -52,10 +53,12 @@ public class NoteActivity extends BaseActivity implements RadioGroup.OnCheckedCh
         String uuid = i.getStringExtra(UUID_TAG);
         if (uuid != null){
             mNote = mNoteDB.loadNoteById(uuid);
+            Log.d("123456", String.valueOf(mNote.getDate()));
             mEditText.setText(mNote.getContent());
             setTagChecked();
         }else {
             mNote = new Note();
+            Log.d("123456", String.valueOf(mNote.getDate()));
 
             mEditText.setFocusable(true);
             mEditText.setFocusableInTouchMode(true);
@@ -66,6 +69,8 @@ public class NoteActivity extends BaseActivity implements RadioGroup.OnCheckedCh
 
         }
 
+        setTitle( DateFormat.format("yyyy/MM/dd hh:mm:ss", new Date(mNote.getDate())));
+
         mEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -75,6 +80,7 @@ public class NoteActivity extends BaseActivity implements RadioGroup.OnCheckedCh
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 mNote.setContent(s.toString());
+                mNote.setDate(new Date().getTime());
             }
 
             @Override
@@ -109,19 +115,15 @@ public class NoteActivity extends BaseActivity implements RadioGroup.OnCheckedCh
     }
 
     @Override
-    public void onResume(){
-        super.onResume();
-
-    }
-
-    @Override
     public void onPause(){
         super.onPause();
         if (mNote.getContent() != null){
             if (mNoteDB.loadNoteById(mNote.getId()) != null){
-                mNoteDB.updateNote(mNote.getId(), mNote.getContent(), mNote.getTagColor());
+                mNoteDB.updateNote(mNote);
+                Log.d("123456", String.valueOf(mNote.getDate()));
             }else {
                 mNoteDB.saveNote(mNote);
+                Log.d("123456", String.valueOf(mNote.getDate()));
             }
         }
     }

@@ -16,7 +16,7 @@ public class NoteOpenHelper extends SQLiteOpenHelper {
             + "id integer primary key autoincrement,"
             + "uuid text,"
             + "content text,"
-            + "date text,"
+            + "date integer,"
             + "tag_color text)";
 
     public NoteOpenHelper(Context context, String name, CursorFactory factory, int version){

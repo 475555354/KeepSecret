@@ -2,6 +2,7 @@ package com.example.kid.keepsecret;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import com.example.kid.keepsecret.model.Note;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Created by niuwa on 2016/4/28.
@@ -40,10 +42,10 @@ public class ItemAdapter extends ArrayAdapter<Note>{
         ImageView tag = (ImageView)v.findViewById(R.id.item_tag);
 
         Note note = getItem(position);
+        long date = note.getDate();
 
         title.setText(note.getContent());
-        time.setText(note.getDate());
-        //tag.setDrawingCacheBackgroundColor(Color.parseColor(note.getTagColor()));
+        time.setText( DateFormat.format("MM-dd", new Date(date)));
         if (note.getTagColor() != null){
             tag.setColorFilter(Color.parseColor(note.getTagColor()));
         }else {

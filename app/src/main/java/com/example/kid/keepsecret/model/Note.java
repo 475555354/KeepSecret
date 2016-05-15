@@ -1,7 +1,5 @@
 package com.example.kid.keepsecret.model;
 
-import android.text.format.DateFormat;
-
 import java.util.Date;
 import java.util.UUID;
 
@@ -12,12 +10,12 @@ public class Note {
     private String mId;
     private String title;
     private String content;
-    private Date mDate;
+    private long mDate;
     private String tagColor;
 
     public Note(){
         mId = UUID.randomUUID().toString();
-        mDate = new Date();
+        mDate = new Date().getTime();
     }
 
     public String getId() {
@@ -44,11 +42,11 @@ public class Note {
         this.content = content;
     }
 
-    public String getDate() {
-        return (String)DateFormat.format("MM-dd", mDate);
+    public long getDate() {
+        return mDate;
     }
 
-    public void setDate(Date date) {
+    public void setDate(long date) {
         mDate = date;
     }
 

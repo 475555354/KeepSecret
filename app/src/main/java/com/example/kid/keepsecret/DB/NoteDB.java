@@ -84,11 +84,12 @@ public class NoteDB {
     }
 
 
-    public void updateNote(String uuid, String content, String tagColor){
+    public void updateNote(Note note){
         ContentValues values = new ContentValues();
-        values.put("content", content);
-        values.put("tag_color", tagColor);
-        db.update(TABLE_NAME, values, "uuid = ?", new String[]{uuid});
+        values.put("content", note.getContent());
+        values.put("date", note.getDate());
+        values.put("tag_color", note.getTagColor());
+        db.update(TABLE_NAME, values, "uuid = ?", new String[]{note.getId()});
     }
 
     public void deleteNoteById(String uuid){
@@ -99,6 +100,7 @@ public class NoteDB {
         note = new Note();
         note.setId(cursor.getString(cursor.getColumnIndex("uuid")));
         note.setContent(cursor.getString(cursor.getColumnIndex("content")));
+        note.setDate(cursor.getLong(cursor.getColumnIndex("date")));
         note.setTagColor(cursor.getString(cursor.getColumnIndex("tag_color")));
     }
 }
