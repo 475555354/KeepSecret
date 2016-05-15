@@ -146,7 +146,6 @@ public class NoteListActivity extends BaseActivity implements View.OnClickListen
             }
         });
 
-
         //init drawer layout view
         drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
         addItemLine = (LinearLayout)findViewById(R.id.drawer_item_add);
@@ -172,11 +171,6 @@ public class NoteListActivity extends BaseActivity implements View.OnClickListen
         };
         drawerLayout.addDrawerListener(mDrawerToggle);
 
-
-        //init popup window view
-
-
-        //popPassGrid.setPasswordType(PasswordType.NUMBER);
     }
 
     private void initDB(){
