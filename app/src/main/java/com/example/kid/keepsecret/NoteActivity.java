@@ -49,22 +49,21 @@ public class NoteActivity extends BaseActivity implements RadioGroup.OnCheckedCh
         mRadioGroup = (RadioGroup) findViewById(R.id.radio_group);
 
         Intent i = getIntent();
-        String uuid = i.getStringExtra(UUID_TAG);
-        if (uuid != null){
-            mNote = mNoteDB.loadNoteById(uuid);
-            mEditText.setText(mNote.getContent());
-            setTagChecked();
+        Note note = i.getParcelableExtra(UUID_TAG);
+        if (note !=null){
+                mNote = note;
+                mEditText.setText(mNote.getContent());
+                setTagChecked();
         }else {
             mNote = new Note();
-
             mEditText.setFocusable(true);
             mEditText.setFocusableInTouchMode(true);
             mEditText.requestFocus();
             InputMethodManager imm = (InputMethodManager)
                     getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.showSoftInput(mEditText, InputMethodManager.SHOW_FORCED);
-
         }
+
 
         setTitle( DateFormat.format("yyyy/MM/dd hh:mm:ss", new Date(mNote.getDate())));
 

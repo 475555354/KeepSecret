@@ -98,9 +98,9 @@ public class NoteListActivity extends BaseActivity implements View.OnClickListen
         noteList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String uuid = mNotes.get(position).getId();
+                //String uuid = mNotes.get(position).getId();
                 Intent i = new Intent(NoteListActivity.this, NoteActivity.class);
-                i.putExtra(NoteActivity.UUID_TAG, uuid);
+                i.putExtra(NoteActivity.UUID_TAG, mNotes.get(position));
                 startActivity(i);
             }
         });
